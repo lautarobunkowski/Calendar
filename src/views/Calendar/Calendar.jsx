@@ -1,8 +1,16 @@
-import { Avatar } from "flowbite-react";
+import { Avatar, Datepicker} from 'flowbite-react';
+import { useState } from "react";
 
 const Calendar = () => {
+  const [ showCalendar, setShowCalendar] = useState(true)
+
+  const handlerClick = (value) => {
+    console.log(value)
+    setShowCalendar(!showCalendar)
+  }
+
   return (
-    <div className="w-full px-10">
+    <div className="w-full px-10 flex flex-col items-center">
       <div className="pt-8">
         <Avatar rounded size="lg" />
         <div className="font-medium mt-2">
@@ -51,7 +59,11 @@ const Calendar = () => {
           <p className="text-primary">{`San Martin 1043 - "Urban Identi"`}</p>
         </div>
       </div>
-      <div className="pt-4"></div>
+      { showCalendar &&
+        <div className="pt-4 w-[300px]">
+        <Datepicker inline open={true} showClearButton={false} showTodayButton={false} language="ES" onSelectedDateChanged={handlerClick}/>
+        </div>
+      }
     </div>
   );
 };

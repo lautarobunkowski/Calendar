@@ -1,29 +1,26 @@
 import { Avatar, Datepicker} from 'flowbite-react';
-import { useState } from "react";
 
 const Calendar = () => {
-  const [ showCalendar, setShowCalendar] = useState(true)
 
   const handlerClick = (value) => {
     console.log(value)
-    setShowCalendar(!showCalendar)
   }
 
   return (
-    <div className="w-full px-10 flex flex-col items-center">
-      <div className="pt-8">
+    <div className="w-full flex flex-col items-center">
+      <div className="pt-8 px-10">
         <Avatar rounded size="lg" />
         <div className="font-medium mt-2">
-          <h1 className="text-sm text-gray-500 dark:text-gray-400">
+          <h1 className="text-md text-gray-500 font-semibold dark:text-gray-400">
             Juan Da Rosa
           </h1>
-          <div className="text-lg">Corte de Pelo</div>
+          <div className="text-2xl font-bold">Corte de Pelo</div>
         </div>
       </div>
-      <div className=" w-full text-left mt-4 font-semibold border-b pb-6">
+      <div className=" w-full text-left my-4 font-semibold px-10">
         <div className="flex w-full gap-2">
           <svg
-            className="w-6 h-6 text-gray-800"
+            className="w-6 h-6 text-primary"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -40,7 +37,7 @@ const Calendar = () => {
         </div>
         <div className="flex w-full gap-2 mt-4">
           <svg
-            className="w-6 h-6 text-gray-800 dark:text-white"
+            className="w-6 h-6 text-primary dark:text-white"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -59,11 +56,9 @@ const Calendar = () => {
           <p className="text-primary">{`San Martin 1043 - "Urban Identi"`}</p>
         </div>
       </div>
-      { showCalendar &&
-        <div className="pt-4 w-[300px]">
-        <Datepicker inline open={true} showClearButton={false} showTodayButton={false} language="ES" onSelectedDateChanged={handlerClick}/>
-        </div>
-      }
+      <div className="w-full border-t">
+        <Datepicker title='Seleccioná un dia' inline open={true} showClearButton={false} showTodayButton={false} language="ES" onSelectedDateChanged={handlerClick} className='my-4'/>
+      </div>
     </div>
   );
 };

@@ -12,6 +12,10 @@ export const renderRoutes = (routes) => {
 export const routes = [
   {
     path: "/",
+    element: lazy(async () => await import("../views/Home/Home.jsx")),
+  },
+  {
+    path: "/calendar",
     element: lazy(async () => await import("../views/Calendar/Calendar.jsx")),
   },
   {

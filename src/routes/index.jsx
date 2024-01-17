@@ -15,7 +15,11 @@ export const routes = [
     element: lazy(async () => await import("../views/Home/Home.jsx")),
   },
   {
-    path: "/calendar",
+    path: "/cortedepelo",
+    element: lazy(async () => await import("../views/Calendar/Calendar.jsx")),
+  },
+  {
+    path: "/cortedepelo",
     element: lazy(async () => await import("../views/Calendar/Calendar.jsx")),
   },
   {

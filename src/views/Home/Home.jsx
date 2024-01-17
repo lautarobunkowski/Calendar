@@ -13,7 +13,7 @@ const Home = () => {
           <p className="text-sm my-4">Reserva tu corte en el horario disponible que más cómodo te quede. ¡Te espero!</p>
         </div>
       </div>
-      <Link to="/calendar" className="border-t pt-6 py-10 w-full px-10 font-bold hover:bg-gray-200">
+      <Link to="/cortedepelo" className="border-t pt-6 py-10 w-full px-10 font-bold hover:bg-gray-200">
         <button className="flex items-center">
           <div className=" rounded-full w-6 h-6 bg-violet-600 mr-4 "></div>
             <p className="text-black text-lg text-left">Corte de pelo</p>

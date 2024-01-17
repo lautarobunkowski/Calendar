@@ -1,9 +1,17 @@
 import { Avatar, Datepicker} from 'flowbite-react';
+import { useNavigate } from "react-router-dom";
 
 const Calendar = () => {
+  const navigate = useNavigate()
 
   const handlerClick = (value) => {
-    console.log(value)
+    const timestamp = new Date().setHours(0, 0, 0, 0) //timestamp
+    const currentDate = new Date(timestamp)
+    if(value < currentDate){
+      console.log("no se puede acceder a una fecha anterior")
+    } else {
+      navigate(`/cortedepelo?date=${value.getFullYear()}-${value.getMonth()}-${value.getDate()}`)
+    }
   }
 
   return (

@@ -1,18 +1,20 @@
-import { Avatar, Datepicker} from 'flowbite-react';
+import { Avatar, Datepicker } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 
 const Calendar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handlerClick = (value) => {
-    const timestamp = new Date().setHours(0, 0, 0, 0) //timestamp
-    const currentDate = new Date(timestamp)
-    if(value < currentDate){
-      console.log("no se puede acceder a una fecha anterior")
+    const timestamp = new Date().setHours(0, 0, 0, 0); //timestamp
+    const currentDate = new Date(timestamp);
+    if (value < currentDate) {
+      console.log("no se puede acceder a una fecha anterior");
     } else {
-      navigate(`/cortedepelo?date=${value.getFullYear()}-${value.getMonth()}-${value.getDate()}`)
+      navigate(
+        `/cortedepelo/schedules?date=${value.getFullYear()}-${value.getMonth()}-${value.getDate()}`
+      );
     }
-  }
+  };
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -65,7 +67,16 @@ const Calendar = () => {
         </div>
       </div>
       <div className="w-full border-t">
-        <Datepicker title='Seleccioná un dia' inline open={true} showClearButton={false} showTodayButton={false} language="ES" onSelectedDateChanged={handlerClick} className='my-4'/>
+        <Datepicker
+          title="Seleccioná un dia"
+          inline
+          open={true}
+          showClearButton={false}
+          showTodayButton={false}
+          language="ES"
+          onSelectedDateChanged={handlerClick}
+          className="my-4"
+        />
       </div>
     </div>
   );

@@ -1,11 +1,10 @@
-import React from 'react'
+import { useLocation } from "react-router-dom";
 
 const Appointment = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const date = searchParams.get("date");
+  return <div></div>;
+};
 
-export default Appointment
+export default Appointment;

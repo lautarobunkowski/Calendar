@@ -6,7 +6,7 @@ import BackButton from "./components/BackButton";
 const App = () => {
   return (
     <div className="min-h-screen min-w-full">
-      <BackButton/>
+      <BackButton />
       <Suspense fallback={<h1>Loading...</h1>}>
         <Routes>{renderRoutes(routes)}</Routes>
       </Suspense>

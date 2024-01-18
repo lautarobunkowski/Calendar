@@ -19,8 +19,10 @@ export const routes = [
     element: lazy(async () => await import("../views/Calendar/Calendar.jsx")),
   },
   {
-    path: "/cortedepelo",
-    element: lazy(async () => await import("../views/Calendar/Calendar.jsx")),
+    path: "/cortedepelo/schedules",
+    element: lazy(
+      async () => await import("../views/Appointment/Appointment.jsx")
+    ),
   },
   {
     path: "/login",
@@ -33,5 +35,5 @@ export const routes = [
   {
     path: "/*",
     element: lazy(async () => await import("../views/NotFound/NotFound.jsx")),
-  }
+  },
 ];

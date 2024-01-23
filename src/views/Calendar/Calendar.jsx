@@ -1,18 +1,23 @@
 import { Avatar, Datepicker } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(customParseFormat);
+dayjs.extend(utc);
+
 const Calendar = () => {
   const navigate = useNavigate();
 
   const handlerClick = (value) => {
-    const timestamp = new Date().setHours(0, 0, 0, 0); //timestamp
-    const currentDate = new Date(timestamp);
-    if (value < currentDate) {
+    const currentDate = dayjs("00:00:00", "HH:mm:ss").toDate();
+    const inputDate = dayjs.utc(value);
+    if (inputDate < currentDate) {
       console.log("no se puede acceder a una fecha anterior");
     } else {
-      navigate(
-        `/cortedepelo/schedules?date=${value.getFullYear()}-${value.getMonth()}-${value.getDate()}`
-      );
+      navigate(`/cortedepelo/schedules?date=${inputDate.format("YYYY-MM-DD")}`);
     }
   };
 
@@ -68,7 +73,7 @@ const Calendar = () => {
       </div>
       <div className="w-full border-t">
         <Datepicker
-          title="Seleccioná un dia"
+          title="Selecciona un dia"
           inline
           open={true}
           showClearButton={false}

@@ -20,6 +20,7 @@ const Appointment = () => {
       const { data } = await axios(
         `/appointments?service=${location.pathname.split("/")[1]}&date=${date}`
       );
+      console.log(data)
       setAppointments(data);
     };
     fetchingData();
@@ -51,9 +52,12 @@ const Appointment = () => {
             <ul className="flex flex-col gap-2">
               {appointments.appointments.map((app, index) => {
                 return (
-                  <li key={`appointment-${index}`}>
-                    <button className="border h-[52px] w-full border-[rgba(0,105,255,0.5)] hover:border-[rgba(0,105,255)] hover:border-2 text-[#0069FF] font-bold rounded-md">
+                  <li key={`appointment-${index}`} className="flex group gap-x-[4%]">
+                    <button className="transition-all duration-300 group-focus-within:w-[48%] w-full border h-[52px] border-[rgba(0,105,255,0.5)] hover:border-[rgba(0,105,255)] hover:border-2 text-[#0069FF] font-bold rounded-md group-focus-within:bg-[#666666] group-focus-within:text-white group-focus-within:border-none">
                       {app.time.slice(0, 5)}
+                    </button>
+                    <button className="transition-all duration-300 group-focus-within:w-[48%] w-0 hidden group-focus-within:block bg-[rgba(0,105,255)] text-white font-bold rounded-md">
+                      siguiente
                     </button>
                   </li>
                 );

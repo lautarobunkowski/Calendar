@@ -11,18 +11,21 @@ export const renderRoutes = (routes) => {
 
 export const routes = [
   {
-    path: "/",
-    element: lazy(async () => await import("../views/Home/Home.jsx")),
+    path: "/cortedepelo/schedule/details",
+    element: lazy(
+      async () =>
+        await import("../views/AppointmentDetails/AppointmentDetails.jsx")
+    ),
+  },
+  {
+    path: "/cortedepelo/schedule",
+    element: lazy(
+      async () => await import("../views/Appointment/Appointment.jsx")
+    ),
   },
   {
     path: "/cortedepelo",
     element: lazy(async () => await import("../views/Calendar/Calendar.jsx")),
-  },
-  {
-    path: "/cortedepelo/schedules",
-    element: lazy(
-      async () => await import("../views/Appointment/Appointment.jsx")
-    ),
   },
   {
     path: "/login",
@@ -31,6 +34,10 @@ export const routes = [
   {
     path: "/Admin",
     element: lazy(async () => await import("../views/Admin/Admin.jsx")),
+  },
+  {
+    path: "/",
+    element: lazy(async () => await import("../views/Home/Home.jsx")),
   },
   {
     path: "/*",

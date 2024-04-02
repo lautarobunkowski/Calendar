@@ -4,12 +4,11 @@ const BackButton = () => {
   const navigate = useNavigate();
   return (
     <button
-      className="rounded-full border flex items-center justify-center w-10 h-10 fixed top-4 left-4 z-50"
+      className="rounded-full border flex items-center justify-center w-11 h-11 fixed top-4 left-4 z-50"
       onClick={() => navigate(-1)}
     >
       <svg
-        className="w-6 h-6 text-blue-700 dark:text-white"
-        aria-hidden="true"
+        className="w-5 h-5 text-blue-700"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 14 10"

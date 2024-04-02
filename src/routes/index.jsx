@@ -11,20 +11,20 @@ export const renderRoutes = (routes) => {
 
 export const routes = [
   {
-    path: "/cortedepelo/schedule/details",
+    path: "/corte%de%pelo/schedule/details",
     element: lazy(
       async () =>
         await import("../views/AppointmentDetails/AppointmentDetails.jsx")
     ),
   },
   {
-    path: "/cortedepelo/schedule",
+    path: "/corte%de%pelo/schedule",
     element: lazy(
       async () => await import("../views/Appointment/Appointment.jsx")
     ),
   },
   {
-    path: "/cortedepelo",
+    path: "/corte%de%pelo",
     element: lazy(async () => await import("../views/Calendar/Calendar.jsx")),
   },
   {

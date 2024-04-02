@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Calendar as CalendarComp } from "../../components/Calendar";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/Avatar";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
@@ -11,6 +13,7 @@ dayjs.extend(utc);
 
 const Calendar = () => {
   const navigate = useNavigate();
+  const [service, setService] = useState()
 
   const handlerClick = (value) => {
     const currentDate = dayjs("00:00:00", "HH:mm:ss").toDate();
@@ -23,8 +26,23 @@ const Calendar = () => {
       );
     }
   };
+  console.log(service)
+
+  useEffect(() => {
+    const fetchingData = async() => {
+      try {
+        const {data} = await axios(`/service?name=cortedepelo`)
+        setService(data)
+      } catch (error) {
+        console.log({error: error.message})
+      }
+    }
+    fetchingData()
+  }, [])
+  
 
   return (
+    service !== undefined && 
     <div className="w-full flex flex-col items-center">
       <div className="pt-8 px-10">
         <Avatar className="w-16 h-16 mx-auto">
@@ -35,7 +53,7 @@ const Calendar = () => {
           <h1 className="text-md text-gray-500 font-semibold dark:text-gray-400">
             Juan Da Rosa
           </h1>
-          <div className="text-2xl font-bold">Corte de Pelo</div>
+          <div className="text-2xl font-bold">{service.name}</div>
         </div>
       </div>
       <div className=" w-full text-left mt-4 mb-10 font-semibold px-10 max-w-[340px]">
@@ -80,7 +98,7 @@ const Calendar = () => {
       <div className="w-full border-t">
         <div className="w-fit mx-auto">
           <h3 className="font-semibold text-xl my-4">Selecciona un dia</h3>
-          <CalendarComp mode="single" onSelect={handlerClick} />
+          <CalendarComp mode="single" onSelect={handlerClick} initialFocus disabledDays={service.days}/>
         </div>
       </div>
     </div>

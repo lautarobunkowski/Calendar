@@ -3,6 +3,15 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { DayPicker } from "react-day-picker";
 import { es } from "date-fns/locale";
 
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(customParseFormat);
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 import cn from "clsx";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
@@ -13,8 +22,17 @@ function Calendar({
   showOutsideDays = false,
   ...props
 }: CalendarProps) {
+
+  const disabledDays:Date[]= []
+  const currentDay= Number(dayjs().format("DD"))
+  for (let i = 1; i < currentDay; i++) {
+    disabledDays.push(dayjs(`0${i}`,"DD").toDate())
+  }
+
   return (
     <DayPicker
+      disabled={disabledDays}
+      numberOfMonths={1}
       locale={es}
       showOutsideDays={showOutsideDays}
       className={cn("p-3 max-w-[350px] ", className)}
@@ -26,7 +44,7 @@ function Calendar({
         caption_label: "text-base font-md w-[125px]",
         nav: "space-x-1 flex items-center",
         nav_button: cn(
-          "p-0 text-[#0060D4] hover:bg-[#D9E9FF] bg-[#EEF5FF] rounded-full flex items-center justify-center w-11 h-11"
+          "p-0 text-[#0060D4] hover:bg-[#D9E9FF] bg-[#EEF5FF] rounded-full flex items-center justify-center w-10 h-10"
         ),
         nav_button_previous: "absolute -left-9",
         nav_button_next: "absolute",
@@ -41,15 +59,15 @@ function Calendar({
             : "[&:has([aria-selected])]:rounded-md"
         ),
         day: cn(
-          "h-full w-full p-0 font-bold text-[#0060D4] hover:bg-[#D9E9FF] text-[1rem] aria-selected:opacity-100 rounded-full bg-[#EEF5FF]"
+          "h-full w-full p-0 font-bold text-[#0060D4] text-[1rem] rounded-full bg-[#EEF5FF] hover:bg-[#D9E9FF]"
         ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected: "text-primary-foreground hover:text-primary-foreground",
-        day_today: "text-accent-foreground bg-transparent text-gray-400",
+        day_today: "text-accent-foreground ",
         day_outside:
-          "day-outside text-muted-foreground opacity-50  aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
-        day_disabled: "text-muted-foreground opacity-50",
+          "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
+        day_disabled: "text-muted-foreground bg-transparent font-normal text-gray-400 hover:bg-transparent",
         day_range_middle:
           "aria-selected:bg-accent aria-selected:text-accent-foreground",
         day_hidden: "invisible",

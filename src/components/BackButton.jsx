@@ -4,7 +4,7 @@ const BackButton = () => {
   const navigate = useNavigate();
   return (
     <button
-      className="rounded-full border flex items-center justify-center w-11 h-11 fixed top-4 left-4 z-50"
+      className="bg-white rounded-full border flex items-center justify-center w-11 h-11 fixed sm:absolute top-4 left-4 z-50"
       onClick={() => navigate(-1)}
     >
       <svg

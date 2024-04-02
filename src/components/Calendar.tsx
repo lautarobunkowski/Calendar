@@ -35,10 +35,10 @@ function Calendar({
       numberOfMonths={1}
       locale={es}
       showOutsideDays={showOutsideDays}
-      className={cn("p-3 max-w-[350px] ", className)}
+      className={cn("p-3 max-w-[350px] lg:max-w-full", className)}
       classNames={{
-        months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
-        month: "space-y-4",
+        months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 w-full",
+        month: "space-y-4 w-full",
         caption:
           "flex justify-center pt-1 relative items-center w-fit mx-auto mb-6",
         caption_label: "text-base font-md w-[125px]",
@@ -48,12 +48,12 @@ function Calendar({
         ),
         nav_button_previous: "absolute -left-9",
         nav_button_next: "absolute",
-        table: "border-collapse space-y-1",
+        table: "border-collapse space-y-1 w-full",
         head_row: "flex justify-between w-full",
         head_cell: "font-light text-[11px] w-11 uppercase",
-        row: "flex w-full mt-2 gap-x-[0.1rem]",
+        row: "flex w-full mt-2 gap-x-[0.1rem] lg:gap-x-[0.5rem]",
         cell: cn(
-          "w-11 h-11 relative p-0 flex items-center justify-center text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md",
+          "w-11 h-11 lg:w-12 lg:h-12 relative p-0 flex items-center justify-center text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md",
           props.mode === "range"
             ? "[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md"
             : "[&:has([aria-selected])]:rounded-md"

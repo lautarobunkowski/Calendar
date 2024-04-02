@@ -22,11 +22,10 @@ const Calendar = () => {
       console.log("no se puede acceder a una fecha anterior");
     } else {
       navigate(
-        `/corte%de%pelo/schedule?date=${inputDate.format("YYYY-MM-DD")}`
+        `/corte de pelo/schedule?date=${inputDate.format("YYYY-MM-DD")}`
       );
     }
   };
-  console.log(service)
 
   useEffect(() => {
     const fetchingData = async() => {
@@ -43,21 +42,22 @@ const Calendar = () => {
 
   return (
     service !== undefined && 
-    <div className="w-full flex flex-col items-center">
-      <div className="pt-8 px-10">
-        <Avatar className="w-16 h-16 mx-auto">
+    <div className="w-full flex flex-col items-center lg:flex-row lg:items-start flex-1">
+      <div className="lg:flex flex-col lg:flex-1 lg:mt-10">
+        <div className="pt-8 px-10 lg:flex flex-col items-start lg:px-4 ">
+          <Avatar className="w-16 h-16 mx-auto lg:mx-0">
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback className="bg-slate-500"></AvatarFallback>
-        </Avatar>
-        <div className="font-medium mt-2">
+          </Avatar>
+          <div className="font-medium mt-2 lg:flex flex-col items-start">
           <h1 className="text-md text-gray-500 font-semibold dark:text-gray-400">
             Juan Da Rosa
           </h1>
-          <div className="text-2xl font-bold">{service.name}</div>
+          <div className="text-3xl font-bold">{service.name}</div>
+          </div>
         </div>
-      </div>
-      <div className=" w-full text-left mt-4 mb-10 font-semibold px-10 max-w-[340px]">
-        <div className="flex w-full gap-2 items-center">
+        <div className="w-fit gap-4 text-center mt-4 mb-10 font-semibold px-10 lg:pl-4 lg:mx-0 mx-auto max-w-[340px] flex flex-col sm:flex-row sm:max-w-full lg:flex-col">
+        <div className="flex gap-2 items-center">
           <svg
             className="w-5 h-5 text-primary"
             aria-hidden="true"
@@ -74,7 +74,7 @@ const Calendar = () => {
           </svg>
           <p className="text-primary">45 min</p>
         </div>
-        <div className="flex w-full gap-2 mt-4 items-center">
+        <div className="flex gap-2 mt-4 items-center sm:mt-0">
           <svg
             className="w-5 h-5 text-primary"
             aria-hidden="true"
@@ -94,11 +94,12 @@ const Calendar = () => {
           </svg>
           <p className="text-primary">{`Salta 172 - "Al Punto"`}</p>
         </div>
+        </div>
       </div>
-      <div className="w-full border-t">
-        <div className="w-fit mx-auto">
-          <h3 className="font-semibold text-xl my-4">Selecciona un dia</h3>
-          <CalendarComp mode="single" onSelect={handlerClick} initialFocus disabledDays={service.days}/>
+      <div className="w-full border-t lg:flex-1 lg:border-t-0 lg:border-l lg:h-full">
+        <div className="w-fit lg:w-full lg:flex flex-col items-center mx-auto my-4">
+          <h3 className="font-semibold text-xl py-2">Selecciona un dia</h3>
+          <CalendarComp mode="single" onSelect={handlerClick} initialFocus disabledDays={service.days} className="w-full"/>
         </div>
       </div>
     </div>

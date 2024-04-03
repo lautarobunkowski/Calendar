@@ -10,21 +10,21 @@ export const renderRoutes = (routes) => {
 };
 
 export const routes = [
+  // {
+  //   path: "/corte de pelo/schedule",
+  //   element: lazy(
+  //     async () => await import("../views/Appointment/Appointment.jsx")
+  //   ),
+  // },
+  // {
+  //   path: "/corte de pelo/schedule/details",
+  //   element: lazy(
+  //     async () =>
+  //       await import("../views/AppointmentDetails/AppointmentDetails.jsx")
+  //   ),
+  // },
   {
-    path: "/corte de pelo/schedule",
-    element: lazy(
-      async () => await import("../views/Appointment/Appointment.jsx")
-    ),
-  },
-  {
-    path: "/corte de pelo/schedule/details",
-    element: lazy(
-      async () =>
-        await import("../views/AppointmentDetails/AppointmentDetails.jsx")
-    ),
-  },
-  {
-    path: "/corte de pelo",
+    path: "/corte de pelo/*",
     element: lazy(async () => await import("../views/Calendar/Calendar.jsx")),
   },
   {

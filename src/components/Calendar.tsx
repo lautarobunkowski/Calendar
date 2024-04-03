@@ -22,11 +22,10 @@ function Calendar({
   showOutsideDays = false,
   ...props
 }: CalendarProps) {
-
-  const disabledDays:Date[]= []
-  const currentDay= Number(dayjs().format("DD"))
+  const disabledDays: Date[] = [];
+  const currentDay = Number(dayjs().format("DD"));
   for (let i = 1; i < currentDay; i++) {
-    disabledDays.push(dayjs(`0${i}`,"DD").toDate())
+    disabledDays.push(dayjs(`0${i}`, "DD").toDate());
   }
 
   return (
@@ -35,9 +34,10 @@ function Calendar({
       numberOfMonths={1}
       locale={es}
       showOutsideDays={showOutsideDays}
-      className={cn("p-3 max-w-[350px] lg:max-w-full", className)}
+      className={cn("p-3 sm:p-6 max-w-[350px] sm:max-w-full", className)}
       classNames={{
-        months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 w-full",
+        months:
+          "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 w-full",
         month: "space-y-4 w-full",
         caption:
           "flex justify-center pt-1 relative items-center w-fit mx-auto mb-6",
@@ -51,9 +51,9 @@ function Calendar({
         table: "border-collapse space-y-1 w-full",
         head_row: "flex justify-between w-full",
         head_cell: "font-light text-[11px] w-11 uppercase",
-        row: "flex w-full mt-2 gap-x-[0.1rem] lg:gap-x-[0.5rem]",
+        row: "flex w-full mt-2 gap-x-[0.1rem] sm:justify-between",
         cell: cn(
-          "w-11 h-11 lg:w-12 lg:h-12 relative p-0 flex items-center justify-center text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md",
+          "w-11 h-11 relative p-0 flex items-center justify-center text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md",
           props.mode === "range"
             ? "[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md"
             : "[&:has([aria-selected])]:rounded-md"
@@ -67,7 +67,8 @@ function Calendar({
         day_today: "text-accent-foreground ",
         day_outside:
           "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
-        day_disabled: "text-muted-foreground bg-transparent font-normal text-gray-400 hover:bg-transparent",
+        day_disabled:
+          "text-muted-foreground bg-transparent font-normal text-gray-400 hover:bg-transparent",
         day_range_middle:
           "aria-selected:bg-accent aria-selected:text-accent-foreground",
         day_hidden: "invisible",

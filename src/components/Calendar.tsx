@@ -34,14 +34,14 @@ function Calendar({
       numberOfMonths={1}
       locale={es}
       showOutsideDays={showOutsideDays}
-      className={cn("p-3 sm:p-6 max-w-[350px] sm:max-w-full", className)}
+      className={cn("", className)}
       classNames={{
         months:
           "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 w-full",
         month: "space-y-4 w-full",
         caption:
           "flex justify-center pt-1 relative items-center w-fit mx-auto mb-6",
-        caption_label: "text-base font-md w-[125px]",
+        caption_label: "text-[16px] font-normal w-[125px]",
         nav: "space-x-1 flex items-center",
         nav_button: cn(
           "p-0 text-[#0060D4] hover:bg-[#D9E9FF] bg-[#EEF5FF] rounded-full flex items-center justify-center w-10 h-10"
@@ -50,8 +50,8 @@ function Calendar({
         nav_button_next: "absolute",
         table: "border-collapse space-y-1 w-full",
         head_row: "flex justify-between w-full",
-        head_cell: "font-light text-[11px] w-11 uppercase",
-        row: "flex w-full mt-2 gap-x-[0.1rem] sm:justify-between",
+        head_cell: "font-normal text-[11px] w-11 uppercase",
+        row: "flex w-full mt-2 sm:justify-between",
         cell: cn(
           "w-11 h-11 relative p-0 flex items-center justify-center text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md",
           props.mode === "range"

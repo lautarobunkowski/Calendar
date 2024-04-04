@@ -44,11 +44,13 @@ const Calendar = () => {
 
   return (
     service !== undefined && (
-      <div className="w-full flex flex-col items-center lg:flex-row lg:items-start flex-1">
+      <div className="w-full flex flex-col items-center lg:flex-row lg:items-start ">
         <div
           className={`${
-            location.split("/")[2] !== "schedules" ? "" : "hidden sm:block"
-          } lg:flex flex-col lg:mt-10 lg:w-[35%]`}
+            location.split("/")[2] !== "schedules"
+              ? "lg:w-[50%]"
+              : "hidden sm:block lg:w-[35%]"
+          } lg:flex flex-col lg:mt-10`}
         >
           <div className="pt-8 px-10 lg:flex flex-col items-start lg:px-4 ">
             <Avatar className="w-16 h-16 mx-auto lg:mx-0">
@@ -102,16 +104,24 @@ const Calendar = () => {
             </div>
           </div>
         </div>
-        <div className="w-full border-t lg:border-t-0 lg:border-l lg:h-full flex justify-center lg:w-[50%] flex-1">
+        <div
+          className={`pt-6 w-full border-t lg:border-t-0 lg:border-l lg:h-full flex justify-center lg:w-[50%] flex-1`}
+        >
           <div
             className={`${
               location.split("/")[2] === undefined
-                ? ""
+                ? "w-full"
                 : "hidden sm:block w-[60%]"
-            } lg:w-[60%]`}
+            }`}
           >
-            <div className="w-fit sm:w-full sm:flex flex-col items-center mx-auto my-4">
-              <h3 className="font-semibold text-xl py-2">
+            <div
+              className={`${
+                location.split("/")[2] === undefined
+                  ? "max-w-[400px]"
+                  : "sm:max-w-full"
+              } w-full mx-auto`}
+            >
+              <h3 className="ml-8 font-semibold text-xl pt-2 mb-5 mx-auto text-left">
                 Selecciona fecha y hora
               </h3>
               <CalendarComp
@@ -119,7 +129,7 @@ const Calendar = () => {
                 onSelect={handlerClick}
                 initialFocus
                 disabledDays={service.days}
-                className="w-full"
+                className="max-w-[340px] sm:max-w-full sm:mx-[19px] mx-auto px-[10px] sm:px-0 mb-20"
               />
             </div>
           </div>

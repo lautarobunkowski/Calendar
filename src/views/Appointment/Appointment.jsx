@@ -36,14 +36,14 @@ const Appointment = () => {
             {dayjs.utc(date).format("MMMM D, YYYY")}
           </div>
         </div>
-        <div className="hidden sm:flex w-full mt-[86px] mb-3">
+        <div className="hidden sm:block w-full mt-[86px] mb-3">
           <h3>{dayjs.utc(date).format("dddd, MMMM D")}</h3>
         </div>
-        <div className="px-4 pt-4 mt-[115px] sm:mt-0 overflow-y-auto w-full">
+        <div className="mt-[115px] sm:mt-0 overflow-y-auto w-full sm:pr-[24px] sm:pb-[15px]">
           <h2 className="mb-[5px] font-bold text-2xl sm:hidden">
             Selecciona un Turno
           </h2>
-          <div className="pb-4">
+          <div className="pb-4 mx-[10px]">
             <p className="my-3 text-sm sm:hidden">
               Duración:
               {appointments.duration[1] !== "0"
@@ -53,17 +53,17 @@ const Appointment = () => {
                 : null}
               {dayjs.utc(appointments.duration, "HH:mm").format(" mm [min]")}
             </p>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-[10px]">
               {appointments.appointments.map((app, index) => {
                 return (
                   <li
                     key={`appointment-${index}`}
-                    className="flex group gap-x-[4%]"
+                    className="flex group focus-within:gap-x-[4%] hover:border-[rgba(0,105,255)]"
                   >
-                    <button className="transition-all duration-300 group-focus-within:w-[48%] w-full border h-[52px] border-[rgba(0,105,255,0.5)] hover:border-[rgba(0,105,255)] hover:border-2 text-[#0069FF] font-bold rounded-md group-focus-within:bg-[#666666] group-focus-within:text-white group-focus-within:border-none">
+                    <button className="transition-all duration-300 group-focus-within:duration-300 group-focus-within:w-[48%] w-full overflow-hidden border h-[52px] border-[rgba(0,105,255,0.5)] hover:border-[rgba(0,105,255)] hover:border-2 text-[#0069FF] font-bold rounded-md group-focus-within:bg-[#666666] group-focus-within:text-white group-focus-within:border-none hover:duration-0">
                       {app.time.slice(0, 5)}
                     </button>
-                    <button className="transition-all duration-300 group-focus-within:w-[48%] w-0 hidden group-focus-within:block bg-[rgba(0,105,255)] text-white font-bold rounded-md">
+                    <button className="group-focus-within:transition-all group-focus-within:duration-300 group-focus-within:w-[48%] w-0 bg-[rgba(0,105,255)] overflow-hidden text-white font-bold rounded-md">
                       siguiente
                     </button>
                   </li>

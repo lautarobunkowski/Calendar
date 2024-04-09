@@ -41,10 +41,11 @@ const Calendar = () => {
     };
     fetchingData();
   }, []);
+  console.log(location.split("/")[2])
 
   return (
     service !== undefined && (
-      <div className="w-full flex flex-col items-center lg:flex-row lg:items-start ">
+      <div className="w-full flex flex-col items-center lg:flex-row lg:items-start h-full">
         <div
           className={`${
             location.split("/")[2] !== "schedules"
@@ -82,7 +83,7 @@ const Calendar = () => {
               </svg>
               <p className="text-primary">45 min</p>
             </div>
-            <div className="flex gap-2 mt-4 items-center sm:mt-0">
+            <div className="flex gap-2 items-center sm:mt-0">
               <svg
                 className="w-5 h-5 text-primary"
                 aria-hidden="true"

@@ -13,7 +13,7 @@ const Home = () => {
           <h1 className="text-md text-gray-500 font-semibold dark:text-gray-400">
             Juan Da Rosa
           </h1>
-          <p className="text-sm my-4">
+          <p className="text-sm  my-4">
             Reserva tu corte en el horario disponible que más cómodo te quede.
             ¡Te espero!
           </p>

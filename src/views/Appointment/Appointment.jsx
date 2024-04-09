@@ -27,7 +27,7 @@ const Appointment = () => {
 
   return (
     appointments.appointments && (
-      <div className="my-0 mx-auto w-full h-auto relative text-center sm:w-[40%] lg:w-[40%] overflow-hidden flex flex-col items-center px-4 sm:px-0">
+      <div className="my-0 mx-auto w-full relative text-center sm:w-[40%] lg:w-[40%] overflow-hidden flex flex-col items-center px-4 sm:px-0">
         <div className="top-0 fixed sm:relative bg-white w-full z-10 border-b sm:border-none py-6 sm:hidden">
           <h1 className="mt-0 mb-[5px] font-bold text-xl">
             {dayjs.utc(date).format("dddd")}
@@ -36,10 +36,10 @@ const Appointment = () => {
             {dayjs.utc(date).format("MMMM D, YYYY")}
           </div>
         </div>
-        <div className="hidden sm:block w-full mt-[86px] mb-3">
-          <h3>{dayjs.utc(date).format("dddd, MMMM D")}</h3>
+        <div className="hidden sm:block w-full mt-[54px] mb-8">
+          <h3 className="text-left">{dayjs.utc(date).format("dddd, MMMM D")}</h3>
         </div>
-        <div className="mt-[115px] sm:mt-0 overflow-y-auto w-full sm:pr-[24px] sm:pb-[15px]">
+        <div className="mt-[115px] sm:mt-0 w-full sm:pr-[24px] sm:pb-[15px] flex-1 basis-[100px] overflow-auto">
           <h2 className="mb-[5px] font-bold text-2xl sm:hidden">
             Selecciona un Turno
           </h2>

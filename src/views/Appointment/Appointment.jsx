@@ -37,9 +37,11 @@ const Appointment = () => {
           </div>
         </div>
         <div className="hidden sm:block w-full mt-[54px] mb-8">
-          <h3 className="text-left">{dayjs.utc(date).format("dddd, MMMM D")}</h3>
+          <h3 className="text-left">
+            {dayjs.utc(date).format("dddd, MMMM D")}
+          </h3>
         </div>
-        <div className="mt-[115px] sm:mt-0 w-full sm:pr-[24px] sm:pb-[15px] flex-1 basis-[100px] overflow-auto">
+        <div className="mt-[115px] sm:mt-0 w-full sm:pr-[24px] sm:pb-[15px] flex-1 basis-[100px] sm:overflow-auto">
           <h2 className="mb-[5px] font-bold text-2xl sm:hidden">
             Selecciona un Turno
           </h2>

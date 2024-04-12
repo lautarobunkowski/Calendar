@@ -23,9 +23,10 @@ function Calendar({
   ...props
 }: CalendarProps) {
   const disabledDays: Date[] = [];
+
   const currentDay = Number(dayjs().format("DD"));
   for (let i = 1; i < currentDay; i++) {
-    disabledDays.push(dayjs(`0${i}`, "DD").toDate());
+    disabledDays.push(dayjs(`${i}`, "D").toDate());
   }
 
   return (
@@ -61,17 +62,17 @@ function Calendar({
         day: cn(
           "h-full w-full p-0 font-bold text-[#0060D4] text-[1rem] rounded-full bg-[#EEF5FF] hover:bg-[#D9E9FF]"
         ),
-        day_range_start: "day-range-start",
-        day_range_end: "day-range-end",
-        day_selected: "",
-        day_today: "text-white bg-[#0060D7] hover:bg-[#0060D7]",
-        day_outside:
-          "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
+        // day_range_start: "day-range-start",
+        // day_range_end: "day-range-end",
+        day_selected: "text-white bg-[#0060D4] hover:bg-[#0060D4]",
+        day_today: "border-white",
+        // day_outside:
+        //   "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
         day_disabled:
           "text-muted-foreground bg-transparent font-normal text-gray-400 hover:bg-transparent",
-        day_range_middle:
-          "aria-selected:bg-accent aria-selected:text-accent-foreground",
-        day_hidden: "invisible",
+        // day_range_middle:
+        //   "aria-selected:bg-accent aria-selected:text-accent-foreground",
+        // day_hidden: "invisible",
         ...classNames,
       }}
       components={{

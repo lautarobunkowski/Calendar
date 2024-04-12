@@ -12,7 +12,7 @@ export const renderRoutes = (routes) => {
 export const routes = [
   {
     path: "/corte de pelo/*",
-    element: lazy(async () => await import("../views/Calendar/Calendar.jsx")),
+    element: lazy(async () => await import("../views/ServiceWrapper/ServiceWrapper.jsx")),
   },
   {
     path: "/login",

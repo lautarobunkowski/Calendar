@@ -20,7 +20,7 @@ const Home = () => {
         </div>
       </div>
       <Link
-        to="/corte de pelo"
+        to="/corte de pelo/calendar"
         className="border-t pt-6 py-10 w-full px-10 font-bold hover:bg-gray-200"
       >
         <button className="flex items-center">

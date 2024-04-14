@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-// import { Button } from "../../components/Button";
 import {
   Form,
   FormControl,
@@ -15,7 +14,11 @@ import { Input } from "../../components/Input";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const ProfileForm = () => {
+type Props = {
+  appointmentDate: string;
+};
+
+const ProfileForm = ({ appointmentDate }: Props) => {
   const navigate = useNavigate();
   //reglas de validacion
   const formSchema = z.object({
@@ -46,7 +49,7 @@ const ProfileForm = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    console.log(values, appointmentDate);
     navigate(`/corte de pelo/invitees`);
   }
 

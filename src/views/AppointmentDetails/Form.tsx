@@ -1,33 +1,37 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "../../components/Button";
+// import { Button } from "../../components/Button";
 import {
   Form,
   FormControl,
-  FormDescription,
+  // FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "../../components/Form";
 import { Input } from "../../components/Input";
-
-//reglas de validacion
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(2, { message: "Debe contener al menos 2 caracteres." })
-    .max(50, { message: "Debe contener hasta 50 caracteres." }),
-  email: z.string().email({ message: "Dirección de email invalido." }),
-  phone: z.string().regex(/^\+(?:[0-9] ?){6,14}[0-9]$/, {
-    message:
-      "Este formato de número de teléfono no se reconoce. Por favor verifique el país y el número.",
-  }),
-});
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProfileForm = () => {
+  const navigate = useNavigate();
+  //reglas de validacion
+  const formSchema = z.object({
+    name: z
+      .string()
+      .min(2, { message: "Debe contener al menos 2 caracteres." })
+      .max(50, { message: "Debe contener hasta 50 caracteres." }),
+    email: z.string().email({ message: "Dirección de email invalido." }),
+    phone: z.string().regex(/^\+(?:[0-9] ?){6,14}[0-9]$/, {
+      message:
+        "Este formato de número de teléfono no se reconoce. Por favor verifique el país y el número.",
+    }),
+  });
+
   //define tu formulario
+  //<z.infer<typeof formSchema>>
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,10 +42,12 @@ const ProfileForm = () => {
   });
 
   //define un submit handler
+  //: z.infer<typeof formSchema> => tipado de values parameters
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
+    navigate(`/corte de pelo/invitees`);
   }
 
   return (
@@ -127,12 +133,12 @@ const ProfileForm = () => {
           </span>{" "}
           de Calendly.
         </p>
-        <Button
+        <button
           type="submit"
-          className="bg-[#0069FF] border-[#0069FF] text-white text-base rounded-[40px] min-h-[44px] active:bg-[#004AB3] active:border-[#004AB3] hover:bg-[#005FE6] hover:border-[#005FE6]"
+          className="font-bold py-[8px] px-[16px] bg-[#006aff] border-[#0069FF] rounded-[40px] text-white text-base min-h-[44px] active:bg-[#004AB3] active:border-[#004AB3] hover:bg-[#005FE6] hover:border-[#005FE6]"
         >
           Schedule Event
-        </Button>
+        </button>
       </form>
     </Form>
   );

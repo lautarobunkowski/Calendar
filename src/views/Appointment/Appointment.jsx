@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -10,6 +10,7 @@ dayjs.extend(customParseFormat);
 dayjs.extend(utc);
 
 const Appointment = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [appointments, setAppointments] = useState({});
   const searchParams = new URLSearchParams(location.search);
@@ -24,6 +25,14 @@ const Appointment = () => {
     };
     fetchingData();
   }, []);
+
+  const handlerClick = (app) => {
+    const appointmentDate = dayjs(`${date} ${app.time}`, "YYYY-MM-DD HH-mm-ss")
+      .local()
+      .format();
+
+    navigate(`/corte de pelo/details/${appointmentDate}`);
+  };
 
   return (
     appointments.appointments && (
@@ -65,7 +74,10 @@ const Appointment = () => {
                     <button className="transition-all duration-300 group-focus-within:duration-300 group-focus-within:w-[48%] w-full overflow-hidden border h-[52px] border-[rgba(0,105,255,0.5)] hover:border-[rgba(0,105,255)] hover:border-2 text-[#0069FF] font-bold rounded-md group-focus-within:bg-[#666666] group-focus-within:text-white group-focus-within:border-none hover:duration-0">
                       {app.time.slice(0, 5)}
                     </button>
-                    <button onClick={() => console.log(app)} className="group-focus-within:transition-all group-focus-within:duration-300 group-focus-within:w-[48%] w-0 bg-[rgba(0,105,255)] overflow-hidden text-white font-bold rounded-md">
+                    <button
+                      onClick={() => handlerClick(app)}
+                      className="group-focus-within:transition-all group-focus-within:duration-300 group-focus-within:w-[48%] w-0 bg-[rgba(0,105,255)] overflow-hidden text-white font-bold rounded-md"
+                    >
                       siguiente
                     </button>
                   </li>

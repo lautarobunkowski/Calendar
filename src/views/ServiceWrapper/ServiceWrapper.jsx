@@ -1,12 +1,6 @@
-import {
-  useLocation,
-  // useNavigate,
-  Routes,
-  Route,
-  Link,
-} from "react-router-dom";
-// import { Calendar as CalendarComp } from "../../components/Calendar";
+import { useLocation, Routes, Route, Link } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
+import AppointmentDetails from "../AppointmentDetails/AppointmentDetails";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/Avatar";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -15,27 +9,12 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import utc from "dayjs/plugin/utc";
 
-// import Appointment from "../Appointment/Appointment";
-
 dayjs.extend(customParseFormat);
 dayjs.extend(utc);
 
 const ServiceWrapper = () => {
-  // const navigate = useNavigate();
   const location = decodeURIComponent(useLocation().pathname);
   const [service, setService] = useState();
-
-  // const handlerClick = (value) => {
-  //   const currentDate = dayjs("00:00:00", "HH:mm:ss").toDate();
-  //   const inputDate = dayjs.utc(value);
-  //   if (inputDate < currentDate) {
-  //     // console.log("no se puede acceder a una fecha anterior");
-  //   } else {
-  //     navigate(
-  //       `/corte de pelo/schedules?date=${inputDate.format("YYYY-MM-DD")}`
-  //     );
-  //   }
-  // };
 
   useEffect(() => {
     const fetchingData = async () => {
@@ -54,9 +33,9 @@ const ServiceWrapper = () => {
       <div className="w-full flex flex-col items-center lg:flex-row lg:items-start">
         <div
           className={`${
-            location.split("/")[3] !== "schedules"
-              ? "lg:w-[50%]"
-              : "hidden sm:block lg:w-[35%]"
+            location.split("/")[location.split("/").length - 1] !== "calendar"
+              ? "hidden sm:block lg:w-[35%]"
+              : "lg:w-[50%] "
           } lg:flex flex-col lg:h-full justify-between`}
         >
           <div className="lg:mt-10">
@@ -122,51 +101,12 @@ const ServiceWrapper = () => {
           </div>
         </div>
         <Routes>
-          <Route path={"/calendar/*"} element={<Calendar/>}/>
+          <Route path={"/calendar/*"} element={<Calendar />} />
+          <Route
+            path={"/details/:appointmentDate"}
+            element={<AppointmentDetails />}
+          />
         </Routes>
-        {/* <div
-          className={`pt-6 w-full flex-col border-t lg:border-t-0 lg:border-l lg:h-full flex justify-start lg:w-[50%] flex-1`}
-        >
-          <div className="flex-1 flex flex-row">
-            <div
-              className={`${
-                location.split("/")[2] === undefined
-                  ? "w-full"
-                  : "hidden sm:block w-[60%]"
-              }`}
-            >
-              <div
-                className={`${
-                  location.split("/")[2] === undefined
-                    ? "max-w-[400px]"
-                    : "sm:max-w-full"
-                } w-full mx-auto`}
-              >
-                <h3 className="ml-8 font-semibold text-xl pt-2 mb-5 mx-auto text-left">
-                  Selecciona fecha y hora
-                </h3>
-                <CalendarComp
-                  mode="single"
-                  onSelect={handlerClick}
-                  initialFocus
-                  disabledDays={service.days}
-                  className="max-w-[340px] sm:max-w-full sm:mx-[19px] mx-auto px-[10px] sm:px-0 mb-20"
-                />
-              </div>
-            </div>
-            <Routes>
-              <Route path="/schedules" element={<Appointment />} />
-            </Routes>
-          </div>
-          <div className="pt-4 max-w-[350px] w-full mx-auto flex justify-between text-sm lg:hidden pb-[24px]">
-            <Link to={"#"} className="text-[#0069FF] hover:underline">
-              <span>Cookie settings</span>
-            </Link>
-            <Link to={"#"} className="hover:underline">
-              Report abuse
-            </Link>
-          </div>
-        </div> */}
       </div>
     )
   );

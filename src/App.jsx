@@ -14,12 +14,12 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
+        const {data} = await axios.get(
           `/service?name=${location.split("/")[1]}`
         );
         setService(data);
       } catch (error) {
-        console.error("Error al obtener los datos:", error);
+        console.error("Error al obtener los datos del servicio:", error);
       }
     };
     fetchData();

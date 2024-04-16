@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+
 import {
   Form,
   FormControl,
@@ -11,14 +12,22 @@ import {
   FormMessage,
 } from "../../components/Form";
 import { Input } from "../../components/Input";
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import useStore from "../../zustand/store";
+import axios from "axios";
+
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
+dayjs.extend(customParseFormat);
 
 type Props = {
   appointmentDate: string;
 };
 
 const ProfileForm = ({ appointmentDate }: Props) => {
+  const service = useStore((state) => state.service)
   const navigate = useNavigate();
   //reglas de validacion
   const formSchema = z.object({
@@ -46,11 +55,26 @@ const ProfileForm = ({ appointmentDate }: Props) => {
 
   //define un submit handler
   //: z.infer<typeof formSchema> => tipado de values parameters
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values, appointmentDate);
-    navigate(`/corte de pelo/invitees`);
+    // console.log(dayjs(appointmentDate).format("HH:mm:ss"));
+    try {
+      const response = await axios.post("/appointment",{
+        date: dayjs(appointmentDate).format("MM-DD-YYYY"), 
+        time: dayjs(appointmentDate).format("HH:mm:ss"), 
+        name: values.name, 
+        email:values.email, 
+        phone: values.phone,
+        service: service.name
+      })
+      if(response.status === 200){
+        return navigate(`/corte de pelo/invitees`);
+      }
+      // console.log("no se pudo agendar el turno")
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

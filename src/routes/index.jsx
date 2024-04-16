@@ -12,11 +12,9 @@ export const renderRoutes = (routes) => {
 export const routes = [
   {
     path: "/corte de pelo/*",
-    element: lazy(async () => await import("../views/ServiceWrapper/ServiceWrapper.jsx")),
-  },
-  {
-    path: "/login",
-    element: lazy(async () => await import("../views/Login/Login.jsx")),
+    element: lazy(
+      async () => await import("../views/ServiceWrapper/ServiceWrapper.jsx")
+    ),
   },
   {
     path: "/Admin",

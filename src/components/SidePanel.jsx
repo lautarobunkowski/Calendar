@@ -1,27 +1,13 @@
 import { useLocation, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { Avatar, AvatarFallback, AvatarImage } from "./Avatar";
+import useStore from "../zustand/store";
 
 const SidePanel = () => {
   const location = decodeURIComponent(useLocation().pathname);
-
-  const [service, setService] = useState();
-
-  useEffect(() => {
-    const fetchingData = async () => {
-      try {
-        const { data } = await axios(`/service?name=cortedepelo`);
-        setService(data);
-      } catch (error) {
-        console.log({ error: error.message });
-      }
-    };
-    fetchingData();
-  }, []);
+  const service = useStore((state) => state.service);
 
   return (
-    service !== undefined && (
+    service !== null && (
       <div
         className={`${
           location.split("/")[location.split("/").length - 1] !== "calendar"

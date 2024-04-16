@@ -39,7 +39,7 @@ const Calendar = () => {
 
   return (
     <div
-      className={`pt-6 w-full flex-col border-t lg:border-t-0 lg:border-l lg:h-full flex justify-start lg:w-[50%] flex-1`}
+      className={`pt-6 w-full flex-col border-t lg:border-t-0 lg:border-l lg:h-full flex justify-start lg:w-[50%] flex-1 `}
     >
       <div className="flex-1 flex flex-row">
         <div
@@ -52,8 +52,8 @@ const Calendar = () => {
           <div
             className={`${
               location.split("/")[location.split("/").length - 1] !== "calendar"
-                ? "max-w-[400px]"
-                : "sm:max-w-full"
+                ? "sm:max-w-full"
+                : "max-w-[400px]"
             } w-full mx-auto`}
           >
             <h3 className="ml-8 font-semibold text-xl pt-2 mb-5 mx-auto text-left">

@@ -1,11 +1,29 @@
 import { renderRoutes, routes } from "./routes/index";
-import { Routes } from "react-router-dom";
+import { Routes, useLocation } from "react-router-dom";
 import { Suspense } from "react";
 import BackButton from "./components/BackButton";
-import { useLocation } from "react-router-dom";
+
+import { useEffect } from "react";
+import axios from "axios";
+import useStore from "./zustand/store";
 
 const App = () => {
   const location = decodeURIComponent(useLocation().pathname);
+  const setService = useStore((state) => state.setService);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `/service?name=${location.split("/")[1]}`
+        );
+        setService(data);
+      } catch (error) {
+        console.error("Error al obtener los datos:", error);
+      }
+    };
+    fetchData();
+  }, [location, setService]);
 
   return (
     <div className="min-h-screen min-w-full h-full bg-[#FBFCFD] sm:pt-16 flex sm:px-[5%] flex-col">

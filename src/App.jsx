@@ -1,7 +1,6 @@
 import { renderRoutes, routes } from "./routes/index";
 import { Routes, useLocation } from "react-router-dom";
 import { Suspense } from "react";
-import BackButton from "./components/BackButton";
 
 import { useEffect } from "react";
 import axios from "axios";
@@ -14,7 +13,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data} = await axios.get(
+        const { data } = await axios.get(
           `/service?name=${location.split("/")[1]}`
         );
         setService(data);
@@ -34,7 +33,6 @@ const App = () => {
             : "lg:max-w-[800px]"
         } sm:mb-8 relative sm:border max-w-[680px] sm:w-[95%] w-full mx-auto sm:shadow-md sm:rounded-lg lg:flex bg-white transition duration-300 min-h-[700px] h-full`}
       >
-        <BackButton />
         <div className="fixed sm:absolute z-50 -right-[5px] -top-[5px] overflow-hidden w-[105px] h-[105px] hover:scale-105 transition-all group">
           <div className="bg-[#505960] relative w-[160px] text-white top-[21px] -left-[11px] rotate-45 text-center leading-[1.2] pt-[9px] pb-[6px] shadow-md group-hover:bg-[#40474c] transition-all">
             <p className="uppercase font-bold text-[8px]">powered by</p>

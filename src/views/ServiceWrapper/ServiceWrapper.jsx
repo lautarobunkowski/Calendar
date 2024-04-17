@@ -3,6 +3,7 @@ import Calendar from "../Calendar/Calendar";
 import AppointmentDetails from "../AppointmentDetails/AppointmentDetails";
 import SidePanel from "../../components/SidePanel";
 import Confirmation from "../Confirmation/Confirmation";
+import BackButon from "../../components/BackButton";
 
 // import dayjs from "dayjs";
 // import customParseFormat from "dayjs/plugin/customParseFormat.js";
@@ -18,6 +19,7 @@ const ServiceWrapper = () => {
         path={"/calendar/*"}
         element={
           <div className="w-full flex flex-col items-center lg:flex-row lg:items-start">
+            <BackButon />
             <SidePanel />
             <Calendar />
           </div>
@@ -27,13 +29,13 @@ const ServiceWrapper = () => {
         path={"/details/:appointmentDate"}
         element={
           <div className="w-full flex flex-col items-center lg:flex-row lg:items-start">
+            <BackButon />
             <SidePanel />
             <AppointmentDetails />
           </div>
         }
       />
-      {/* :appointmentId */}
-      <Route path={"/invitees"} element={<Confirmation />} />
+      <Route path={"/invitees/:appointmentId"} element={<Confirmation />} />
     </Routes>
   );
 };

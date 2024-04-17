@@ -27,7 +27,7 @@ type Props = {
 };
 
 const ProfileForm = ({ appointmentDate }: Props) => {
-  const service = useStore((state) => state.service)
+  const service = useStore((state) => state.service);
   const navigate = useNavigate();
   //reglas de validacion
   const formSchema = z.object({
@@ -60,20 +60,20 @@ const ProfileForm = ({ appointmentDate }: Props) => {
     // ✅ This will be type-safe and validated.
     // console.log(dayjs(appointmentDate).format("HH:mm:ss"));
     try {
-      const response = await axios.post("/appointment",{
-        date: dayjs(appointmentDate).format("MM-DD-YYYY"), 
-        time: dayjs(appointmentDate).format("HH:mm:ss"), 
-        name: values.name, 
-        email:values.email, 
+      const response = await axios.post("/appointment", {
+        date: dayjs(appointmentDate).format("MM-DD-YYYY"),
+        time: dayjs(appointmentDate).format("HH:mm:ss"),
+        name: values.name,
+        email: values.email,
         phone: values.phone,
-        service: service.name
-      })
-      if(response.status === 200){
-        return navigate(`/corte de pelo/invitees`);
+        service: service.name,
+      });
+      if (response.status === 200) {
+        return navigate(`/corte de pelo/invitees/${response.data.id}`);
       }
       // console.log("no se pudo agendar el turno")
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 

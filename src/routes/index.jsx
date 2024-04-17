@@ -11,7 +11,7 @@ export const renderRoutes = (routes) => {
 
 export const routes = [
   {
-    path: "/corte de pelo/*",
+    path: "juandarosa/corte de pelo/*",
     element: lazy(
       async () => await import("../views/ServiceWrapper/ServiceWrapper.jsx")
     ),
@@ -21,7 +21,7 @@ export const routes = [
     element: lazy(async () => await import("../views/Admin/Admin.jsx")),
   },
   {
-    path: "/",
+    path: "juandarosa/",
     element: lazy(async () => await import("../views/Home/Home.jsx")),
   },
   {

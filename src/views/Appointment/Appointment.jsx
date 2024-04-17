@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useStore from "../../zustand/store";
 
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
@@ -10,6 +11,7 @@ dayjs.extend(customParseFormat);
 dayjs.extend(utc);
 
 const Appointment = () => {
+  const service = useStore((state) => state.service)
   const navigate = useNavigate();
   const location = useLocation();
   const [appointments, setAppointments] = useState({});
@@ -19,7 +21,7 @@ const Appointment = () => {
   useEffect(() => {
     const fetchingData = async () => {
       const { data } = await axios(
-        `/appointments?service=${location.pathname.split("/")[1]}&date=${date}`
+        `/appointments?service=${service.name}&date=${date}`
       );
       setAppointments(data);
     };
@@ -31,7 +33,7 @@ const Appointment = () => {
       .local()
       .format();
 
-    navigate(`/corte de pelo/details/${appointmentDate}`);
+    navigate(`/juandarosa/${service.name}/details/${appointmentDate}`);
   };
 
   return (

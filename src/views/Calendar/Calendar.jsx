@@ -30,7 +30,7 @@ const Calendar = () => {
     } else {
       setSelectDate(value);
       navigate(
-        `/corte de pelo/calendar/schedules?date=${inputDate.format(
+        `schedules?date=${inputDate.format(
           "YYYY-MM-DD"
         )}`
       );

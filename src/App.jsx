@@ -16,7 +16,7 @@ const App = () => {
     <div>
       <Suspense fallback={<h1>Loading...</h1>}>
         <Routes>
-          <Route path={`/admin/*`} element={<Admin />} />
+          <Route path={`/event_types/user/me`} element={<Admin />} />
           <Route path={`/${username}/*`} element={<BookingWrapper />} />
           <Route path={`/*`} element={<NotFound />} />
         </Routes>

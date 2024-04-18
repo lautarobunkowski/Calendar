@@ -6,7 +6,7 @@ const AppointmentDetails = () => {
 
   return (
     <div className="flex-1 w-full text-left py-[30px] px-[30px] border-t lg:border-l h-full">
-      <div className="w-fit mx-auto">
+      <div className="w-fit mx-auto lg:mx-0">
         <h1 className="text-xl leading-[1.2] font-semibold w-fit mb-[15px]">
         Ingrese detalles
       </h1>

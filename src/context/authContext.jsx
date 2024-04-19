@@ -1,6 +1,6 @@
 import { auth } from "../firebase/firebase.config";
 import { createContext, useContext } from "react";
-import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signOut, signInWithRedirect} from "firebase/auth";
 
 const authContext = createContext();
 
@@ -15,7 +15,7 @@ export const useAuth = () => {
 export function AuthProvider({ children }) {
   const loginWithGoogle = async () => {
     const responseGoogle = new GoogleAuthProvider();
-    return await signInWithPopup(auth, responseGoogle);
+    return await signInWithRedirect(auth, responseGoogle);
   };
 
   const logout = async () => {

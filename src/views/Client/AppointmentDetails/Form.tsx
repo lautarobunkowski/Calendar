@@ -10,12 +10,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../components/Form";
-import { Input } from "../../components/Input";
+} from "../../../components/Form";
+import { Input } from "../../../components/Input";
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import useStore from "../../zustand/store";
+import useStore from "../../../zustand/store";
 import axios from "axios";
 
 import dayjs from "dayjs";

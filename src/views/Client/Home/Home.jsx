@@ -1,4 +1,8 @@
-import { Avatar, AvatarFallback, AvatarImage } from "../../components/Avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "../../../components/Avatar";
 import { Link } from "react-router-dom";
 
 const Home = () => {

@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import useStore from "../../zustand/store";
+import useStore from "../../../zustand/store";
 
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";

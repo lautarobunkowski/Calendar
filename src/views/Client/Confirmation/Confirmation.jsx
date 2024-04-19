@@ -1,4 +1,4 @@
-import { Button } from "../../components/Button";
+import { Button } from "../../../components/Button";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";

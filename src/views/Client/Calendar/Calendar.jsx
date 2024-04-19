@@ -1,4 +1,4 @@
-import { Calendar as CalendarComp } from "../../components/Calendar";
+import { Calendar as CalendarComp } from "../../../components/Calendar";
 import {
   useLocation,
   useNavigate,
@@ -29,11 +29,7 @@ const Calendar = () => {
       // console.log("no se puede acceder a una fecha anterior");
     } else {
       setSelectDate(value);
-      navigate(
-        `schedules?date=${inputDate.format(
-          "YYYY-MM-DD"
-        )}`
-      );
+      navigate(`schedules?date=${inputDate.format("YYYY-MM-DD")}`);
     }
   };
 

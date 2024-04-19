@@ -1,14 +1,14 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
 import AppointmentDetails from "../AppointmentDetails/AppointmentDetails";
-import SidePanel from "../../components/SidePanel";
+import SidePanel from "../../../components/SidePanel";
 import Home from "../Home/Home";
 import Confirmation from "../Confirmation/Confirmation";
-import BackButon from "../../components/BackButton";
+import BackButon from "../../../components/BackButton";
 
 import { useEffect } from "react";
 import axios from "axios";
-import useStore from "../../zustand/store";
+import useStore from "../../../zustand/store";
 
 const ServiceWrapper = () => {
   const location = decodeURIComponent(useLocation().pathname);

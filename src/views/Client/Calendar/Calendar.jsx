@@ -67,6 +67,7 @@ const Calendar = () => {
         </div>
         <Routes>
           <Route path="/schedules" element={<Appointment />} />
+          <Route path="*" element={<Appointment />} />
         </Routes>
       </div>
       <div className="pt-4 max-w-[350px] w-full mx-auto flex justify-between text-sm lg:hidden pb-[24px]">

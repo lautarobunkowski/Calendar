@@ -1,31 +1,38 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
 import AppointmentDetails from "../AppointmentDetails/AppointmentDetails";
 import SidePanel from "../../../components/SidePanel";
 import Home from "../Home/Home";
+import NotFound from "../../NotFound/NotFound";
 import Confirmation from "../Confirmation/Confirmation";
 import BackButon from "../../../components/BackButton";
 
 import { useEffect } from "react";
 import axios from "axios";
 import useStore from "../../../zustand/store";
+import { set } from "date-fns";
 
 const ServiceWrapper = () => {
+  const navigate = useNavigate();
   const location = decodeURIComponent(useLocation().pathname);
-  const serviceType = decodeURIComponent(useLocation().pathname).split("/")[2];
-  const setService = useStore((state) => state.setService);
+  const serviceUserUrl = decodeURIComponent(useLocation().pathname).split(
+    "/"
+  )[1];
+
+  const serviceUser = useStore((state) => state.serviceUser);
+  const setServiceUser = useStore((state) => state.setServiceUser);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/service?name=${serviceType}`);
-        setService(data);
+        const { data } = await axios.get(`/user?name=${serviceUserUrl}`);
+        setServiceUser(data);
       } catch (error) {
         console.error("Error al obtener los datos del servicio:", error);
       }
     };
     fetchData();
-  }, [serviceType, setService]);
+  }, [serviceUserUrl, setServiceUser, navigate]);
 
   return (
     <div className="min-h-screen min-w-full h-full bg-[#FBFCFD] sm:pt-16 flex sm:px-[5%] flex-col">
@@ -42,33 +49,39 @@ const ServiceWrapper = () => {
             <p className="font-bold text-[14px]">Lautly</p>
           </div>
         </div>
-        <Routes>
-          <Route path={"/"} element={<Home />} />
-          <Route
-            path={"corte de pelo/calendar/*"}
-            element={
-              <div className="w-full flex flex-col items-center lg:flex-row lg:items-start">
-                <BackButon />
-                <SidePanel />
-                <Calendar />
-              </div>
-            }
-          />
-          <Route
-            path={"corte de pelo/details/:appointmentDate"}
-            element={
-              <div className="w-full flex flex-col items-center lg:flex-row lg:items-start">
-                <BackButon />
-                <SidePanel />
-                <AppointmentDetails />
-              </div>
-            }
-          />
-          <Route
-            path={"corte de pelo/invitees/:appointmentId"}
-            element={<Confirmation />}
-          />
-        </Routes>
+        {serviceUser ? (
+          <Routes>
+            <Route path={"/"} element={<Home />} />
+            <Route
+              path={`:service/calendar/*`}
+              element={
+                <div className="w-full flex flex-col items-center lg:flex-row lg:items-start">
+                  <BackButon />
+                  <SidePanel />
+                  <Calendar />
+                </div>
+              }
+            />
+            <Route
+              path={`:service/details/:appointmentDate`}
+              element={
+                <div className="w-full flex flex-col items-center lg:flex-row lg:items-start">
+                  <BackButon />
+                  <SidePanel />
+                  <AppointmentDetails />
+                </div>
+              }
+            />
+            <Route
+              path={`:service/invitees/:appointmentId`}
+              element={<Confirmation />}
+            />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path={"*"} element={<NotFound />} />
+          </Routes>
+        )}
       </div>
     </div>
   );

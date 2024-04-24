@@ -11,7 +11,7 @@ dayjs.extend(customParseFormat);
 dayjs.extend(utc);
 
 const Appointment = () => {
-  const service = useStore((state) => state.service);
+  const currentService = useStore((state) => state.currentService);
   const navigate = useNavigate();
   const location = useLocation();
   const [appointments, setAppointments] = useState({});
@@ -21,19 +21,19 @@ const Appointment = () => {
   useEffect(() => {
     const fetchingData = async () => {
       const { data } = await axios(
-        `/appointments?service=${service?.name}&date=${date}`
+        `/appointments?service=${currentService?.name}&date=${date}`
       );
       setAppointments(data);
     };
     fetchingData();
-  }, [service, date]);
+  }, [currentService, date]);
 
   const handlerClick = (app) => {
     const appointmentDate = dayjs(`${date} ${app.time}`, "YYYY-MM-DD HH-mm-ss")
       .local()
       .format();
 
-    navigate(`/juandarosa/${service.name}/details/${appointmentDate}`);
+    navigate(`/juandarosa/${currentService.name}/details/${appointmentDate}`);
   };
 
   return (

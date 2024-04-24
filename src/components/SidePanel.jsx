@@ -1,13 +1,34 @@
 import { useLocation, Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "./Avatar";
 import useStore from "../zustand/store";
+import { useEffect } from "react";
+import axios from "axios";
+
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
+dayjs.extend(customParseFormat);
 
 const SidePanel = () => {
   const location = decodeURIComponent(useLocation().pathname);
-  const service = useStore((state) => state.service);
+  const serviceType = decodeURIComponent(useLocation().pathname).split("/")[2];
+
+  const currentService = useStore((state) => state.currentService);
+  const setCurrentService = useStore((state) => state.setCurrentService);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`/service?name=${serviceType}`);
+        setCurrentService(data);
+      } catch (error) {
+        console.error("Error al obtener los datos del servicio:", error);
+      }
+    };
+    fetchData();
+  }, [serviceType, setCurrentService]);
 
   return (
-    service !== null && (
+    currentService !== null && (
       <div
         className={`${
           location.split("/")[location.split("/").length - 1] !== "calendar"
@@ -23,9 +44,9 @@ const SidePanel = () => {
             </Avatar>
             <div className="font-medium mt-2 lg:flex flex-col items-start">
               <h1 className="text-md text-gray-500 font-semibold dark:text-gray-400">
-                Juan Da Rosa
+                {currentService.User.name}
               </h1>
-              <div className="text-3xl font-bold">{service.name}</div>
+              <div className="text-3xl font-bold">{currentService.name}</div>
             </div>
           </div>
           <div className="w-fit gap-4 text-center mt-4 mb-10 font-semibold px-10 lg:pl-4 lg:mx-0 mx-auto max-w-[340px] flex flex-col sm:flex-row sm:max-w-full lg:flex-col">
@@ -44,7 +65,9 @@ const SidePanel = () => {
                   d="M10 6v4l3.276 3.276M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                 />
               </svg>
-              <p className="text-primary">45 min</p>
+              <p className="text-primary">
+                {dayjs(currentService.duration, "HH:mm:ss").format("mm")} min
+              </p>
             </div>
             <div className="flex gap-2 items-center sm:mt-0">
               <svg
@@ -64,7 +87,7 @@ const SidePanel = () => {
                   <path d="M13.8 12.938h-.01a7 7 0 1 0-11.465.144h-.016l.141.17c.1.128.2.252.3.372L8 20l5.13-6.248c.193-.209.373-.429.54-.66l.13-.154Z" />
                 </g>
               </svg>
-              <p className="text-primary">{`Salta 172 - "Al Punto"`}</p>
+              <p className="text-primary">{currentService.location}</p>
             </div>
           </div>
         </div>

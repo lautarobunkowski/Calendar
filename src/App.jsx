@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { useAuth } from "./context/authContext.jsx";
 
@@ -13,7 +13,6 @@ const Login = lazy(async () => await import("./views/Login/Login.jsx"));
 const Landing = lazy(async () => await import("./views/Landing/Landing.jsx"));
 
 const App = () => {
-  const username = decodeURIComponent(useLocation().pathname).split("/")[1];
   const auth = useAuth();
 
   return (
@@ -24,7 +23,7 @@ const App = () => {
           {auth.user && (
             <Route path={`/event_types/user/me`} element={<Admin />} />
           )}
-          <Route path={`/${username}/*`} element={<BookingWrapper />} />
+          <Route path={`/:username/*`} element={<BookingWrapper />} />
           <Route path={`/`} element={<Landing />} />
           <Route path={`/*`} element={<NotFound />} />
         </Routes>

@@ -1,15 +1,28 @@
 // import React from 'react'
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
   const auth = useAuth();
 
   const handleGoogle = async () => {
-    const response = await auth.loginWithGoogle();
-    if (response.user) {
-      navigate("/event_types/user/me");
+    try {
+      const response = await auth.loginWithGoogle();
+      console.log(response)
+      if (response.user) {
+        console.log("holis")
+        const {data} = await axios("/user",{
+          name:response.user.displayName,
+          email:response.user.email,
+          imageUrl: response.user.photoURL
+        })
+        console.log(data)
+        navigate("/event_types/user/me");
+      }
+    } catch (error) {
+      console.log(error.message)
     }
   };
 

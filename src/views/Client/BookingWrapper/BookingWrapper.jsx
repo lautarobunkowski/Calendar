@@ -1,16 +1,17 @@
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import useStore from "../../../zustand/store";
+
 import Calendar from "../Calendar/Calendar";
 import AppointmentDetails from "../AppointmentDetails/AppointmentDetails";
 import SidePanel from "../../../components/SidePanel";
 import Home from "../Home/Home";
-import NotFound from "../../NotFound/NotFound";
 import Confirmation from "../Confirmation/Confirmation";
 import BackButon from "../../../components/BackButton";
 
-import { useEffect } from "react";
-import axios from "axios";
-import useStore from "../../../zustand/store";
-import { set } from "date-fns";
+import NotFound from "../../NotFound/NotFound";
+import Loader from "../../../components/Loader/Loader";
 
 const ServiceWrapper = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const ServiceWrapper = () => {
 
   const serviceUser = useStore((state) => state.serviceUser);
   const setServiceUser = useStore((state) => state.setServiceUser);
+  const [userFound, setUserFound] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +30,9 @@ const ServiceWrapper = () => {
         const { data } = await axios.get(`/user?name=${serviceUserUrl}`);
         setServiceUser(data);
       } catch (error) {
-        console.error("Error al obtener los datos del servicio:", error);
+        if (error.response.status === 404) {
+          setUserFound(false);
+        }
       }
     };
     fetchData();
@@ -49,7 +53,10 @@ const ServiceWrapper = () => {
             <p className="font-bold text-[14px]">Lautly</p>
           </div>
         </div>
-        {serviceUser ? (
+        {!userFound && <NotFound />}
+        {!serviceUser && userFound ? (
+          <Loader />
+        ) : (
           <Routes>
             <Route path={"/"} element={<Home />} />
             <Route
@@ -76,10 +83,6 @@ const ServiceWrapper = () => {
               path={`:service/invitees/:appointmentId`}
               element={<Confirmation />}
             />
-          </Routes>
-        ) : (
-          <Routes>
-            <Route path={"*"} element={<NotFound />} />
           </Routes>
         )}
       </div>

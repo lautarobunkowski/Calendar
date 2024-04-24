@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { useAuth } from "./context/authContext.jsx";
+import Loader from "./components/Loader/Loader.jsx";
 
 const BookingWrapper = lazy(
   async () => await import("./views/Client/BookingWrapper/BookingWrapper.jsx")
@@ -17,7 +18,7 @@ const App = () => {
 
   return (
     <div>
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path={`/login`} element={<Login />} />
           {auth.user && (

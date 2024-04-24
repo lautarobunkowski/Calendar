@@ -34,7 +34,7 @@ const Home = () => {
                 key={`service-type-${index}`}
                 to={`${service.name}/calendar`}
                 // onClick={() => setService(service.name)}
-                className="flex-initial basis-[calc(50%_-_40px)] min-h-[180px] max-w-[500px] flex-shrink border-t m-5 p-5 w-full font-bold hover:bg-gray-200"
+                className="flex-initial md:basis-[calc(50%_-_40px)] md:min-h-[180px] max-w-[500px] flex-shrink border-t m-5 p-5 w-full font-bold hover:bg-gray-200"
               >
                 <button className="flex items-center">
                   <div className=" rounded-full w-6 h-6 bg-violet-600 mr-4 "></div>

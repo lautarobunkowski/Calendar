@@ -10,19 +10,17 @@ const Login = () => {
   const handleGoogle = async () => {
     try {
       const response = await auth.loginWithGoogle();
-      console.log(response)
+      console.log(response);
       if (response.user) {
-        console.log("holis")
-        const {data} = await axios("/user",{
-          name:response.user.displayName,
-          email:response.user.email,
-          imageUrl: response.user.photoURL
-        })
-        console.log(data)
+        await axios.post("/user", {
+          name: response.user.displayName,
+          email: response.user.email,
+          imageUrl: response.user.photoURL,
+        });
         navigate("/event_types/user/me");
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
   };
 

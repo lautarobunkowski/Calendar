@@ -3,15 +3,23 @@ import { Suspense, lazy } from "react";
 import { useAuth } from "./context/authContext.jsx";
 import Loader from "./components/Loader/Loader.jsx";
 
+//Client
 const BookingWrapper = lazy(
   async () => await import("./views/Client/BookingWrapper/BookingWrapper.jsx")
 );
-const Admin = lazy(async () => await import("./views/Admin/Home/Home.jsx"));
 const NotFound = lazy(
   async () => await import("./views/NotFound/NotFound.jsx")
 );
 const Login = lazy(async () => await import("./views/Login/Login.jsx"));
 const Landing = lazy(async () => await import("./views/Landing/Landing.jsx"));
+
+//Admin
+const DashboardWrapper = lazy(
+  async () => await import("./views/Admin/DashboardWrapper.jsx")
+);
+const EventTypes = lazy(
+  async () => await import("./views/Admin/EventTypes/EventTypes.jsx")
+);
 
 const App = () => {
   const auth = useAuth();
@@ -21,9 +29,18 @@ const App = () => {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path={`/login`} element={<Login />} />
-          {auth.user && (
-            <Route path={`/event_types/user/me`} element={<Admin />} />
-          )}
+          <Route
+            path={`/event_types/user/me`}
+            element={
+              <DashboardWrapper>
+                <EventTypes />
+              </DashboardWrapper>
+            }
+          />
+          <Route
+            path={`/app/:setting/user/me`}
+            element={<DashboardWrapper />}
+          />
           <Route path={`/:username/*`} element={<BookingWrapper />} />
           <Route path={`/`} element={<Landing />} />
           <Route path={`/*`} element={<NotFound />} />

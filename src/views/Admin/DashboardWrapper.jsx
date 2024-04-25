@@ -28,7 +28,7 @@ const DashboardWrapper = (props) => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      if (auth.user === null) {
+      if (auth.currentUser === null) {
         navigate("/login");
       }
     };
@@ -36,8 +36,8 @@ const DashboardWrapper = (props) => {
   }, [auth, navigate]);
 
   return (
-    auth.user && (
-      <div className="min-h-screen ">
+    auth.currentUser && (
+      <div className="min-h-screen bg-[]">
         <div className="flex">
           {/* <div className="w-[65px]">
           <nav className="w-[65px] fixed z-10 top-0 flex flex-col gap-1 h-screen bg-gray-300">
@@ -115,7 +115,7 @@ const DashboardWrapper = (props) => {
                             </div>
                           </div>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="shadow-xl">
+                        <DropdownMenuContent align="end" className="shadow-xl bg-white max-h-[calc(100vh_-_200px)] overflow-y-auto">
                           <DropdownMenuLabel className="w-[280px] px-0">
                             <div className="flex flex-col items-start w-full text-left px-3 gap-[2px]">
                               <h3 className="text-xl font-bold w-full text-left">
@@ -152,12 +152,12 @@ const DashboardWrapper = (props) => {
                                   >
                                     <Link
                                       to={`/#`}
-                                      className="flex h-10 w-full hover:bg-zinc-700 items-center px-4"
+                                      className="flex h-10 w-full hover:bg-blue-100/50 items-center"
                                     >
                                       <img
                                         src="/icons/Alert.svg"
                                         alt=""
-                                        className="w-6 h-6 mr-4"
+                                        className="w-6 h-6 mr-1"
                                       />
                                       <p className="">{item}</p>
                                     </Link>
@@ -178,12 +178,12 @@ const DashboardWrapper = (props) => {
                                 >
                                   <Link
                                     to={`/#`}
-                                    className="flex h-10 w-full hover:bg-zinc-700 items-center px-4"
+                                    className="flex h-10 w-full hover:bg-blue-100/50 items-center"
                                   >
                                     <img
                                       src="/icons/Alert.svg"
                                       alt=""
-                                      className="w-6 h-6 mr-4"
+                                      className="w-6 h-6 mr-1"
                                     />
                                     <p className="">{item}</p>
                                   </Link>
@@ -195,12 +195,12 @@ const DashboardWrapper = (props) => {
                           <DropdownMenuItem onClick={() => setActive(false)}>
                             <Link
                               to={`/#`}
-                              className="flex h-10 w-full hover:bg-zinc-700 items-center px-4"
+                              className="flex h-10 w-full hover:bg-blue-100/50 items-center"
                             >
                               <img
                                 src="Alert.svg"
                                 alt=""
-                                className="w-6 h-6 mr-4"
+                                className="w-6 h-6 mr-1"
                               />
                               <p className="">Logout</p>
                             </Link>

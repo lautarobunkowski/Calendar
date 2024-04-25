@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const suscribed = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) {
-        console.log("no hay usuario suscrito");
+        // console.log("no hay usuario suscrito");
         setUser(null);
       } else {
         setUser(currentUser);
@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <authContext.Provider value={{ loginWithGoogle, logout, user }}>
+    <authContext.Provider value={{ loginWithGoogle, logout, user}}>
       {children}
     </authContext.Provider>
   );

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { useAuth } from "./context/authContext.jsx";
 import Loader from "./components/Loader/Loader.jsx";
 
@@ -23,28 +23,44 @@ const EventTypes = lazy(
 
 const App = () => {
   const auth = useAuth();
+  const [isAuth, setIsAuth] = useState()
+
+  useEffect(() => {
+    console.log(auth)
+    if(auth.user){
+      setIsAuth(true)
+    }
+  }, [auth])
+  
 
   return (
     <div>
       <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path={`/login`} element={<Login />} />
-          <Route
-            path={`/event_types/user/me`}
-            element={
-              <DashboardWrapper>
+        {
+          isAuth ? (
+            <Routes>
+              <Route path={`/login`} element={<Login />} />
+              <Route
+                path={`/event_types/user/me`}
+                element={
+                  <DashboardWrapper>
                 <EventTypes />
-              </DashboardWrapper>
-            }
-          />
-          <Route
-            path={`/app/:setting/user/me`}
-            element={<DashboardWrapper />}
-          />
-          <Route path={`/:username/*`} element={<BookingWrapper />} />
-          <Route path={`/`} element={<Landing />} />
-          <Route path={`/*`} element={<NotFound />} />
-        </Routes>
+                  </DashboardWrapper>
+                }
+              />
+              <Route
+                path={`/app/:setting/user/me`}
+                element={<DashboardWrapper />}
+              />
+            </Routes>
+          ) : (
+            <Routes>
+              <Route path={`/:username/*`} element={<BookingWrapper />} />
+              <Route path={`/`} element={<Landing />} />
+              <Route path={`/*`} element={<NotFound />} />
+            </Routes>
+          )
+        }
       </Suspense>
     </div>
   );
